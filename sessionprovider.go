@@ -3,6 +3,7 @@ package redis
 import (
 	"encoding/json"
 	"github.com/pkg/errors"
+	"github.com/yetiz-org/gone/ghttp"
 	"github.com/yetiz-org/gone/ghttp/httpsession"
 	datastore "github.com/yetiz-org/goth-datastore"
 	"time"
@@ -11,6 +12,8 @@ import (
 var (
 	SessionPrefix = "httpsession"
 )
+
+const SessionTypeRedis ghttp.SessionType = "REDIS"
 
 func sessionPrefix() string {
 	return SessionPrefix + "-gts" + ":"
