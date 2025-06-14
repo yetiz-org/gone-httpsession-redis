@@ -16,7 +16,7 @@ var (
 const SessionTypeRedis ghttp.SessionType = "REDIS"
 
 func sessionPrefix() string {
-	return SessionPrefix + "-gts" + ":"
+	return SessionPrefix + ":gts:"
 }
 
 func sessionKey(sessionId string) string {
