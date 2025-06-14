@@ -3,7 +3,6 @@ package redis
 import (
 	"encoding/json"
 	"github.com/pkg/errors"
-	"github.com/yetiz-org/gone/ghttp"
 	"github.com/yetiz-org/gone/ghttp/httpsession"
 	datastore "github.com/yetiz-org/goth-datastore"
 	"time"
@@ -13,7 +12,7 @@ var (
 	SessionPrefix = "httpsession"
 )
 
-const SessionTypeRedis ghttp.SessionType = "REDIS"
+const SessionTypeRedis httpsession.SessionType = "REDIS"
 
 func sessionPrefix() string {
 	return SessionPrefix + ":gts:"
@@ -26,6 +25,10 @@ func sessionKey(sessionId string) string {
 type SessionProvider struct {
 	Master *datastore.RedisOp
 	Slave  *datastore.RedisOp
+}
+
+func (s *SessionProvider) Type() httpsession.SessionType {
+	return SessionTypeRedis
 }
 
 func (s *SessionProvider) NewSession(expire time.Time) httpsession.Session {
