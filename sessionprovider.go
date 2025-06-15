@@ -2,10 +2,11 @@ package redis
 
 import (
 	"encoding/json"
+	"time"
+
 	"github.com/pkg/errors"
 	"github.com/yetiz-org/gone/ghttp/httpsession"
 	datastore "github.com/yetiz-org/goth-datastore"
-	"time"
 )
 
 var (
@@ -96,11 +97,11 @@ func (s *SessionProvider) Save(session httpsession.Session) error {
 		return errors.Errorf("session is nil")
 	}
 
-	ttl := int64(session.Expire().Sub(time.Now()).Seconds())
-	if ttl <= 0 {
-		ttl = 1
+	if session.IsExpire() {
+		return errors.Errorf("session expired")
 	}
 
+	ttl := int64(time.Until(session.Expire()).Seconds())
 	sessionData, _ := json.Marshal(session)
 	if err := op.SetExpire(sessionKey(session.Id()), string(sessionData), ttl).Error; err != nil {
 		return err
