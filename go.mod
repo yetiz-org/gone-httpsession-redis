@@ -5,7 +5,7 @@ go 1.24
 require (
 	github.com/pkg/errors v0.8.1
 	github.com/yetiz-org/gone v1.6.3
-	github.com/yetiz-org/goth-datastore v1.1.1
+	github.com/yetiz-org/goth-datastore v1.1.3
 )
 
 require (
