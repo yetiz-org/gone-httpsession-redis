@@ -5,7 +5,7 @@ go 1.24
 require (
 	github.com/pkg/errors v0.8.1
 	github.com/yetiz-org/gone v1.6.3
-	github.com/yetiz-org/goth-datastore v1.1.4
+	github.com/yetiz-org/goth-datastore v1.1.5
 )
 
 require (
@@ -24,7 +24,7 @@ require (
 	github.com/yetiz-org/goth-bytebuf v0.0.0-20250611120548-fb5bbb6566e6 // indirect
 	github.com/yetiz-org/goth-kklogger v0.0.0-20250611122328-03d2bbd5bc69 // indirect
 	github.com/yetiz-org/goth-kkutil v0.0.0-20250611122830-a80c97dfb90a // indirect
-	github.com/yetiz-org/goth-secret v1.1.3 // indirect
+	github.com/yetiz-org/goth-secret v1.1.4 // indirect
 	golang.org/x/sys v0.33.0 // indirect
 	golang.org/x/text v0.26.0 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
