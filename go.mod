@@ -4,8 +4,8 @@ go 1.24
 
 require (
 	github.com/pkg/errors v0.8.1
-	github.com/yetiz-org/gone v1.6.3
-	github.com/yetiz-org/goth-datastore v1.1.6
+	github.com/yetiz-org/gone v1.6.6
+	github.com/yetiz-org/goth-datastore v1.1.10
 )
 
 require (
@@ -22,9 +22,9 @@ require (
 	github.com/stretchr/objx v0.5.2 // indirect
 	github.com/yetiz-org/goth-base62 v0.0.0-20250611115419-c6835bcfab05 // indirect
 	github.com/yetiz-org/goth-bytebuf v0.0.0-20250611120548-fb5bbb6566e6 // indirect
-	github.com/yetiz-org/goth-kklogger v0.0.0-20250611122328-03d2bbd5bc69 // indirect
-	github.com/yetiz-org/goth-kkutil v0.0.0-20250611122830-a80c97dfb90a // indirect
+	github.com/yetiz-org/goth-kklogger v1.1.1 // indirect
 	github.com/yetiz-org/goth-secret v1.1.5 // indirect
+	github.com/yetiz-org/goth-util v1.3.4 // indirect
 	golang.org/x/sys v0.33.0 // indirect
 	golang.org/x/text v0.26.0 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
