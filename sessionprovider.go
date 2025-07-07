@@ -74,7 +74,7 @@ func (s *SessionProvider) Session(key string) httpsession.Session {
 
 	entity := op.Get(sessionKey(key))
 	if entity.Error == nil {
-		session := &httpsession.DefaultSession{}
+		session := httpsession.NewDefaultSession(s)
 		if err := json.Unmarshal([]byte(entity.GetString()), session); err == nil {
 			return session
 		}
