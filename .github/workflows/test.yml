@@ -1,0 +1,232 @@
+# GitHub Actions workflow for testing gone-httpsession-redis
+name: Test
+
+# Trigger the workflow on push and pull request events
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+
+# Define workflow permissions
+permissions:
+  contents: read
+
+jobs:
+  # Job for testing across multiple Go versions
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    
+    # Test strategy with multiple Go versions
+    strategy:
+      matrix:
+        go-version: ['1.21', '1.22', '1.23', '1.24']
+    
+    steps:
+    # Checkout the repository code
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    # Set up Go environment
+    - name: Set up Go ${{ matrix.go-version }}
+      uses: actions/setup-go@v5
+      with:
+        go-version: ${{ matrix.go-version }}
+        cache: true
+    
+    # Verify Go installation
+    - name: Verify Go version
+      run: go version
+    
+    # Download dependencies
+    - name: Download dependencies
+      run: go mod download
+    
+    # Verify dependencies
+    - name: Verify dependencies
+      run: go mod verify
+    
+    # Run go mod tidy and check for changes
+    - name: Check go mod tidy
+      run: |
+        go mod tidy
+        git diff --exit-code go.mod go.sum
+    
+    # Build the project
+    - name: Build
+      run: go build -v ./...
+    
+    # Run tests with race detection and coverage
+    - name: Run tests
+      run: go test -v -race -coverprofile=coverage.out -covermode=atomic ./...
+    
+    # Run tests with short flag for quick validation
+    - name: Run short tests
+      run: go test -v -short ./...
+    
+    # Run benchmarks
+    - name: Run benchmarks
+      run: go test -v -bench=. -benchmem ./...
+
+  # Job for code quality checks
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    
+    steps:
+    # Checkout the repository code
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    # Set up Go environment
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: '1.24'
+        cache: true
+    
+    # Run golangci-lint
+    - name: Run golangci-lint
+      uses: golangci/golangci-lint-action@v6
+      with:
+        version: latest
+        args: --timeout=5m
+
+  # Job for security scanning
+  security:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+    # Checkout the repository code
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    # Set up Go environment
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: '1.24'
+        cache: true
+    
+    # Run Gosec Security Scanner
+    - name: Run Gosec Security Scanner
+      uses: securecodewarrior/github-action-gosec@master
+      with:
+        args: '-no-fail -fmt sarif -out results.sarif ./...'
+    
+    # Upload SARIF results to GitHub Security tab
+    - name: Upload SARIF file
+      uses: github/codeql-action/upload-sarif@v3
+      with:
+        sarif_file: results.sarif
+
+  # Job for code coverage reporting
+  coverage:
+    name: Coverage
+    runs-on: ubuntu-latest
+    
+    steps:
+    # Checkout the repository code
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    # Set up Go environment
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: '1.24'
+        cache: true
+    
+    # Download dependencies
+    - name: Download dependencies
+      run: go mod download
+    
+    # Run tests with coverage
+    - name: Run tests with coverage
+      run: go test -v -race -coverprofile=coverage.out -covermode=atomic ./...
+    
+    # Upload coverage to Codecov
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v4
+      with:
+        file: ./coverage.out
+        flags: unittests
+        name: codecov-umbrella
+        fail_ci_if_error: false
+        verbose: true
+
+  # Job for dependency vulnerability scanning
+  vulnerability-check:
+    name: Vulnerability Check
+    runs-on: ubuntu-latest
+    
+    steps:
+    # Checkout the repository code
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    # Set up Go environment
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: '1.24'
+        cache: true
+    
+    # Download dependencies
+    - name: Download dependencies
+      run: go mod download
+    
+    # Run Nancy to check for vulnerabilities in dependencies
+    - name: Run govulncheck
+      run: |
+        go install golang.org/x/vuln/cmd/govulncheck@latest
+        govulncheck ./...
+
+  # Job for integration tests (if needed)
+  integration:
+    name: Integration Tests
+    runs-on: ubuntu-latest
+    
+    # Run Redis service for integration tests
+    services:
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    
+    steps:
+    # Checkout the repository code
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    # Set up Go environment
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: '1.24'
+        cache: true
+    
+    # Wait for Redis to be ready
+    - name: Wait for Redis
+      run: |
+        until redis-cli -h localhost -p 6379 ping; do
+          echo "Waiting for Redis..."
+          sleep 2
+        done
+    
+    # Download dependencies
+    - name: Download dependencies
+      run: go mod download
+    
+    # Run integration tests (if you have integration test tags)
+    - name: Run integration tests
+      run: go test -v -tags=integration ./...
+      env:
+        REDIS_URL: redis://localhost:6379

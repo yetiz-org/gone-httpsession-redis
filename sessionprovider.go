@@ -1,3 +1,5 @@
+// Package redis provides a Redis-based session provider implementation
+// for the gone HTTP session management system.
 package redis
 
 import (
@@ -10,34 +12,46 @@ import (
 )
 
 var (
+	// SessionPrefix defines the default prefix for Redis session keys
 	SessionPrefix = "httpsession"
 )
 
+// SessionTypeRedis defines the session type identifier for Redis sessions
 const SessionTypeRedis httpsession.SessionType = "REDIS"
 
+// sessionPrefix returns the complete prefix for Redis session keys
 func sessionPrefix() string {
 	return SessionPrefix + ":gts:"
 }
 
+// sessionKey generates a complete Redis key for the given session ID
 func sessionKey(sessionId string) string {
 	return sessionPrefix() + sessionId
 }
 
+// SessionProvider implements the httpsession.SessionProvider interface
+// using Redis as the backend storage. It supports both master and slave
+// Redis instances for read/write separation.
 type SessionProvider struct {
-	Master *datastore.RedisOp
-	Slave  *datastore.RedisOp
+	Master datastore.RedisOperator // Master Redis instance for write operations
+	Slave  datastore.RedisOperator // Slave Redis instance for read operations
 }
 
+// Type returns the session type identifier for this provider
 func (s *SessionProvider) Type() httpsession.SessionType {
 	return SessionTypeRedis
 }
 
+// NewSession creates a new session with the specified expiration time
 func (s *SessionProvider) NewSession(expire time.Time) httpsession.Session {
 	session := httpsession.NewDefaultSession(s)
 	session.SetExpire(expire)
 	return session
 }
 
+// Sessions retrieves all active sessions from Redis storage.
+// It prefers the slave instance for read operations, falling back to master if slave is unavailable.
+// Returns an empty map if no Redis instance is available.
 func (s *SessionProvider) Sessions() map[string]httpsession.Session {
 	sessions := make(map[string]httpsession.Session)
 	op := s.Slave
@@ -62,6 +76,9 @@ func (s *SessionProvider) Sessions() map[string]httpsession.Session {
 	return sessions
 }
 
+// Session retrieves a specific session by its key from Redis storage.
+// It prefers the slave instance for read operations, falling back to master if slave is unavailable.
+// Returns nil if the session is not found or if no Redis instance is available.
 func (s *SessionProvider) Session(key string) httpsession.Session {
 	op := s.Slave
 	if op == nil {
@@ -83,6 +100,9 @@ func (s *SessionProvider) Session(key string) httpsession.Session {
 	return nil
 }
 
+// Save persists a session to Redis storage with expiration time.
+// It prefers the master instance for write operations, falling back to slave if master is unavailable.
+// Returns an error if no Redis instance is available, session is nil, or session has expired.
 func (s *SessionProvider) Save(session httpsession.Session) error {
 	op := s.Master
 	if op == nil {
@@ -110,6 +130,9 @@ func (s *SessionProvider) Save(session httpsession.Session) error {
 	return nil
 }
 
+// Delete removes a session from Redis storage by its key.
+// It prefers the master instance for write operations, falling back to slave if master is unavailable.
+// No action is taken if no Redis instance is available.
 func (s *SessionProvider) Delete(key string) {
 	op := s.Master
 	if op == nil {
@@ -123,6 +146,8 @@ func (s *SessionProvider) Delete(key string) {
 	op.Delete(sessionKey(key))
 }
 
+// NewSessionProvider creates a new SessionProvider using a Redis profile name.
+// It initializes both master and slave Redis connections based on the profile configuration.
 func NewSessionProvider(profileName string) *SessionProvider {
 	provider := &SessionProvider{}
 	redis := datastore.NewRedis(profileName)
@@ -131,6 +156,8 @@ func NewSessionProvider(profileName string) *SessionProvider {
 	return provider
 }
 
+// NewSessionProviderWithRedis creates a new SessionProvider using an existing Redis instance.
+// It extracts both master and slave connections from the provided Redis instance.
 func NewSessionProviderWithRedis(redis *datastore.Redis) *SessionProvider {
 	provider := &SessionProvider{}
 	provider.Master = redis.Master()
