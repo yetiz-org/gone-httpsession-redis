@@ -68,8 +68,8 @@ github.com/yetiz-org/goth-base62 v1.2.0 h1:OPjiYjjrwl4g3I5BHhhF1TcRmD0rMy0RvaOxv
 github.com/yetiz-org/goth-base62 v1.2.0/go.mod h1:ZQ2JR61ySTzysTsqCyxysxHj/VOaYQ3ZoI13kWr6+YU=
 github.com/yetiz-org/goth-bytebuf v1.1.0 h1:YHvpr4RT0tqPsQz5c4hIFJ+3x1fTJQREPhtG/X6Gpao=
 github.com/yetiz-org/goth-bytebuf v1.1.0/go.mod h1:jRCqQB9z1LjzA7c1Jw6sV7OmMLXgZcfBO19y7VbCEGw=
-github.com/yetiz-org/goth-datastore v1.5.1 h1:omkoEc9S+tQ1nGpwoL9jh51HSOrXpk2bho1waZjJeDU=
-github.com/yetiz-org/goth-datastore v1.5.1/go.mod h1:tralelj4dzT7TbvaLq0Wkzr6afvqtd1VmWvyj7r72ZY=
+github.com/yetiz-org/goth-datastore v1.5.2 h1:gCLZ/oOwlSQFzxvsM8oD7CkpzD9dwGeIIxTTZy2FlRE=
+github.com/yetiz-org/goth-datastore v1.5.2/go.mod h1:tralelj4dzT7TbvaLq0Wkzr6afvqtd1VmWvyj7r72ZY=
 github.com/yetiz-org/goth-kklogger v1.2.8 h1:Q6G4kSDfXZ8TmkBoAW9jd6o8+XKOI0ElAo1y56wUIr8=
 github.com/yetiz-org/goth-kklogger v1.2.8/go.mod h1:xOJb2U5Aj/JnBjXjgC+Q2eyE/9waFirMkVYYtyg9Gyc=
 github.com/yetiz-org/goth-util v1.4.0 h1:JAygmLEABjhd2HKJKcWOeohxdKSY83MawPibTKo5Tys=
