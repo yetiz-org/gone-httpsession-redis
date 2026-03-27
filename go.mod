@@ -6,7 +6,7 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/stretchr/testify v1.11.1
 	github.com/yetiz-org/gone v1.12.2
-	github.com/yetiz-org/goth-datastore v1.5.2
+	github.com/yetiz-org/goth-datastore v1.5.3
 )
 
 require (
