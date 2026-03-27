@@ -5,7 +5,7 @@ go 1.24.0
 require (
 	github.com/pkg/errors v0.9.1
 	github.com/stretchr/testify v1.11.1
-	github.com/yetiz-org/gone v1.12.1
+	github.com/yetiz-org/gone v1.12.2
 	github.com/yetiz-org/goth-datastore v1.5.2
 )
 
@@ -31,7 +31,7 @@ require (
 	github.com/yetiz-org/goth-base62 v1.2.0 // indirect
 	github.com/yetiz-org/goth-bytebuf v1.1.0 // indirect
 	github.com/yetiz-org/goth-kklogger v1.2.8 // indirect
-	github.com/yetiz-org/goth-util v1.4.0 // indirect
+	github.com/yetiz-org/goth-util v1.5.0 // indirect
 	go.uber.org/atomic v1.11.0 // indirect
 	golang.org/x/sync v0.19.0 // indirect
 	golang.org/x/text v0.34.0 // indirect

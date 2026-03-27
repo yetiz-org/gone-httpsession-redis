@@ -62,8 +62,8 @@ github.com/stretchr/testify v1.3.0/go.mod h1:M5WIy9Dh21IEIfnGCwXGc5bZfKNJtfHm1UV
 github.com/stretchr/testify v1.7.0/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
 github.com/stretchr/testify v1.11.1 h1:7s2iGBzp5EwR7/aIZr8ao5+dra3wiQyKjjFuvgVKu7U=
 github.com/stretchr/testify v1.11.1/go.mod h1:wZwfW3scLgRK+23gO65QZefKpKQRnfz6sD981Nm4B6U=
-github.com/yetiz-org/gone v1.12.1 h1:EaJEct2YJlikFywzKw3x8x6pAZY4B6Q8KH/a9AUt6AM=
-github.com/yetiz-org/gone v1.12.1/go.mod h1:B5Vh5nqaZuWx9uEFHJ7+WspXG4KZwwHZ2GWhtuVnrmY=
+github.com/yetiz-org/gone v1.12.2 h1:G1aB6F/Va0wjl5nhvCwYY1kdfL7zx8hqTScVlupCUFE=
+github.com/yetiz-org/gone v1.12.2/go.mod h1:Zkk6c0zeJEQcw2+xCNxiibBsKfLHR6SRphInyeHxbW0=
 github.com/yetiz-org/goth-base62 v1.2.0 h1:OPjiYjjrwl4g3I5BHhhF1TcRmD0rMy0RvaOxvDCnIS4=
 github.com/yetiz-org/goth-base62 v1.2.0/go.mod h1:ZQ2JR61ySTzysTsqCyxysxHj/VOaYQ3ZoI13kWr6+YU=
 github.com/yetiz-org/goth-bytebuf v1.1.0 h1:YHvpr4RT0tqPsQz5c4hIFJ+3x1fTJQREPhtG/X6Gpao=
@@ -72,8 +72,8 @@ github.com/yetiz-org/goth-datastore v1.5.2 h1:gCLZ/oOwlSQFzxvsM8oD7CkpzD9dwGeIIx
 github.com/yetiz-org/goth-datastore v1.5.2/go.mod h1:tralelj4dzT7TbvaLq0Wkzr6afvqtd1VmWvyj7r72ZY=
 github.com/yetiz-org/goth-kklogger v1.2.8 h1:Q6G4kSDfXZ8TmkBoAW9jd6o8+XKOI0ElAo1y56wUIr8=
 github.com/yetiz-org/goth-kklogger v1.2.8/go.mod h1:xOJb2U5Aj/JnBjXjgC+Q2eyE/9waFirMkVYYtyg9Gyc=
-github.com/yetiz-org/goth-util v1.4.0 h1:JAygmLEABjhd2HKJKcWOeohxdKSY83MawPibTKo5Tys=
-github.com/yetiz-org/goth-util v1.4.0/go.mod h1:OlFZhAmaSo1oqXeZNECfMu4i3EDaa0wwopAGdqZb1Os=
+github.com/yetiz-org/goth-util v1.5.0 h1:k9MmL/ALc2TRNasSKrUsbCm+i4fBzpp1iTeLfpovoEc=
+github.com/yetiz-org/goth-util v1.5.0/go.mod h1:KJFRieSw6BtOyqKbKzPxYpV8nILkJj/JxdICeISv4GU=
 github.com/zeebo/xxh3 v1.0.2 h1:xZmwmqxHZA8AI603jOQ0tMqmBr9lPeFwGg6d+xy9DC0=
 github.com/zeebo/xxh3 v1.0.2/go.mod h1:5NWz9Sef7zIDm2JHfFlcQvNekmcEl9ekUZQQKCYaDcA=
 go.uber.org/atomic v1.11.0 h1:ZvwS0R+56ePWxUNi+Atn9dWONBPp/AUETXlHW0DxSjE=
