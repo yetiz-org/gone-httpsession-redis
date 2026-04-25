@@ -1,11 +1,11 @@
 module github.com/yetiz-org/gone-httpsession-redis
 
-go 1.24.0
+go 1.26.0
 
 require (
 	github.com/pkg/errors v0.9.1
 	github.com/stretchr/testify v1.11.1
-	github.com/yetiz-org/gone v1.12.2
+	github.com/yetiz-org/gone v1.14.0
 	github.com/yetiz-org/goth-datastore v1.5.4
 )
 
@@ -29,7 +29,7 @@ require (
 	github.com/redis/go-redis/v9 v9.18.0 // indirect
 	github.com/stretchr/objx v0.5.2 // indirect
 	github.com/yetiz-org/goth-base62 v1.2.0 // indirect
-	github.com/yetiz-org/goth-bytebuf v1.1.0 // indirect
+	github.com/yetiz-org/goth-bytebuf v1.2.1 // indirect
 	github.com/yetiz-org/goth-kklogger v1.2.8 // indirect
 	github.com/yetiz-org/goth-util v1.5.0 // indirect
 	go.uber.org/atomic v1.11.0 // indirect
